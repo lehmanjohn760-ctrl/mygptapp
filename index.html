@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Voice Notes & Tasks</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Daily Voice Notes &amp; Task Planner</h1>
+      <p>
+        Capture quick voice memos and organize your daily tasks by priority so
+        you can focus on what matters most.
+      </p>
+    </header>
+
+    <main>
+      <section class="card" id="voice-notes">
+        <h2>Voice Notes</h2>
+        <div class="recorder">
+          <button id="recordButton" class="primary">Start Recording</button>
+          <button id="stopButton" class="danger" disabled>Stop Recording</button>
+          <p id="recordingStatus" aria-live="polite">Ready to record.</p>
+        </div>
+        <form id="noteMetaForm" class="note-meta" hidden>
+          <label class="field">
+            <span>Title</span>
+            <input type="text" id="noteTitle" placeholder="Morning reflection" />
+          </label>
+          <label class="field">
+            <span>Notes</span>
+            <textarea id="noteDescription" rows="3" placeholder="Context or follow up"></textarea>
+          </label>
+          <button type="submit" class="primary">Save Voice Note</button>
+          <button type="button" id="discardNote" class="ghost">Discard</button>
+        </form>
+        <ul id="voiceNotesList" class="item-list empty">
+          <li>No voice notes yet. Start recording to capture one!</li>
+        </ul>
+      </section>
+
+      <section class="card" id="tasks">
+        <h2>Daily To-Do List</h2>
+        <form id="taskForm" class="task-form">
+          <label class="field">
+            <span>Task</span>
+            <input type="text" id="taskTitle" placeholder="Plan weekly meals" required />
+          </label>
+          <label class="field">
+            <span>Details (optional)</span>
+            <textarea id="taskDetails" rows="2" placeholder="Add helpful notes"></textarea>
+          </label>
+          <label class="field">
+            <span>Priority</span>
+            <select id="taskPriority" required>
+              <option value="high">High</option>
+              <option value="medium" selected>Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </label>
+          <button type="submit" class="primary">Add Task</button>
+        </form>
+
+        <div class="legend">
+          <span class="chip high">High</span>
+          <span class="chip medium">Medium</span>
+          <span class="chip low">Low</span>
+        </div>
+
+        <ul id="taskList" class="item-list empty">
+          <li>No tasks yet. Add your first to-do above!</li>
+        </ul>
+      </section>
+    </main>
+
+    <template id="voiceNoteTemplate">
+      <li class="note-item">
+        <div class="note-header">
+          <h3 class="note-title"></h3>
+          <span class="timestamp"></span>
+        </div>
+        <p class="note-description"></p>
+        <audio controls class="note-audio"></audio>
+        <div class="note-actions">
+          <button class="secondary create-task">Create task</button>
+          <button class="ghost delete-note">Delete</button>
+        </div>
+      </li>
+    </template>
+
+    <template id="taskTemplate">
+      <li class="task-item">
+        <div class="task-main">
+          <span class="chip priority"></span>
+          <div class="task-text">
+            <h3 class="task-title"></h3>
+            <p class="task-details"></p>
+          </div>
+        </div>
+        <div class="task-actions">
+          <label class="checkbox">
+            <input type="checkbox" class="complete" />
+            <span>Done</span>
+          </label>
+          <button class="ghost delete-task">Delete</button>
+        </div>
+      </li>
+    </template>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
